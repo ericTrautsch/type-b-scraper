@@ -23,6 +23,7 @@ def extract_links(url: str) -> list:
     links = [hostname + button["href"] for button in buttons if "href" in button.attrs]
     # TODO: Fix edge cases better..
     links = [link for link in links if "pdf" in link]
+
     return links
 
 
