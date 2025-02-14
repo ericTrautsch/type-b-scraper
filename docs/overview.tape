@@ -67,6 +67,7 @@ Set Height 900
 Hide
 
 Type "cd .." Enter
+Type "export PS1=eric:~/repos/part-b-scraper/" Enter
 Type "nix-shell -p uv" Enter
 Sleep 100ms
 # Type "nix-shell -p uv" Enter
@@ -75,4 +76,4 @@ Type "clear" Enter
 Show
 Type "uv run src/main.py" Sleep 800ms  Enter
 
-Sleep 20s
+Sleep 60s

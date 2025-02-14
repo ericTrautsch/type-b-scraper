@@ -8,7 +8,7 @@ Run locally extract Part B schedules from [Part B Schedules](https://pa.gov/agen
 
 ## Scope
 
-For the initial proof of concept, this scraper is built to run locally produce output in a single `.csv` file.
+For the initial proof of concept, this scraper is built to run locally and produce output in a single `.csv` file.
 
 ## Getting Started
 
