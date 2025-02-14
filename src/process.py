@@ -37,17 +37,18 @@ def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
             tables = page.extract_tables()
             for table in tables:
                 df = pd.DataFrame(table)
-                # Drop completely emptry rows
-                df.dropna(how="all", inplace=True)
-                df.columns = df.iloc[0]
-                df = df[1:]
-                df = df.reset_index(drop=True)
-                # Capture PDF Name and Page Number for reference
-                df["PDF_Name"] = pdf_file
-                df["Page_Number"] = page_num
-                all_tables.append(df)
+                if not df.empty:
+                    # Drop completely emptry rows
+                    df.dropna(how="all", inplace=True)
+                    df.columns = df.iloc[0]
+                    df = df[1:]
+                    df = df.reset_index(drop=True)
+                    # Capture PDF Name and Page Number for reference
+                    df["PDF_Name"] = pdf_file
+                    df["Page_Number"] = page_num
+                    all_tables.append(df)
 
-    return pd.concat(all_tables)
+    return pd.concat(all_tables, ignore_index=True)
 
 
 def save(df: pd.DataFrame, output_path: str = "output.csv"):
@@ -62,8 +63,13 @@ def save(df: pd.DataFrame, output_path: str = "output.csv"):
     df.to_csv(output_path, index=False)
 
 
-if __name__ == "__main__":
-    pdf_folder = "./data/"
-
+def process(pdf_folder: str = "./data/"):
+    """
+    Processes a folder of pdfs into a single dataframe and saves output
+    """
     df = process_pdfs(pdf_folder)
     save(df)
+
+
+if __name__ == "__main__":
+    process()
