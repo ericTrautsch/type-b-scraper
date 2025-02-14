@@ -4,6 +4,8 @@
 
 Run locally extract Part B schedules from [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html) and collect output in a single `.csv` file.
 
+![Overview GIF](./docs/overview.gif)
+
 ## Scope
 
 For the initial proof of concept, this scraper is built to run locally produce output in a single `.csv` file.
@@ -43,7 +45,7 @@ python src/main.py
 
 #### Run via [`Docker`](https://www.docker.com) (requires `docker`)
 
-**Linux** (Works on windows, but `volume` mapping not guaranteed)
+**Linux** (Works on windows, but output may not produce outside of container)
 ```bash
 docker build . -t part-b-scraper
 docker run --volume output:. part-b-scraper
