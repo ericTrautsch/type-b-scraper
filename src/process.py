@@ -31,6 +31,7 @@ def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
     # TODO: Remove pdf file, read from pdf_path instead..
     @param pdf_file: File name of the pdf, to trace back to
     """
+    all_tables = []
     with pdfplumber.open(pdf_path) as pdf:
         for page_num, page in enumerate(pdf.pages, start=1):
             tables = page.extract_tables()
@@ -38,10 +39,15 @@ def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
                 df = pd.DataFrame(table)
                 # Drop completely emptry rows
                 df.dropna(how="all", inplace=True)
+                df.columns = df.iloc[0]
+                df = df[1:]
+                df = df.reset_index(drop=True)
                 # Capture PDF Name and Page Number for reference
                 df["PDF_Name"] = pdf_file
                 df["Page_Number"] = page_num
-    return df
+                all_tables.append(df)
+
+    return pd.concat(all_tables)
 
 
 def save(df: pd.DataFrame, output_path: str = "output.csv"):
