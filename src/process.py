@@ -10,14 +10,20 @@ def process_pdfs(pdf_dir: str) -> pd.DataFrame:
     @param pdf_dir: directory to look in for pdfs to process
     """
     all_tables = []
+    failed_tables = []
     seen_headers = set()
-    # Loop through all pdfs in the folder
-    for pdf_file in os.listdir(pdf_dir):
+    # Loop through all pdfs in the folder in sorted order
+    for pdf_file in sorted(os.listdir(pdf_dir)):
         if pdf_file.endswith(".pdf"):
             pdf_path = os.path.join(pdf_dir, pdf_file)
-            print(f"Processing: {pdf_path}")
-            all_tables.append(extract_table_from_pdf(pdf_path, pdf_file))
+            try:
+                all_tables.append(extract_table_from_pdf(pdf_path, pdf_file))
+                print(f"Processed: {pdf_path}")
+            except:
+                print(f"Failed to extract {pdf_path}")
+                failed_tables.append(pdf_path)
     # Concatenate all tables and serve as csv
+    print(f"Failed to extract {len(failed_tables)} files. {failed_tables}")
     final_df = pd.concat(all_tables, ignore_index=True)
     return final_df
 
@@ -37,17 +43,15 @@ def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
             tables = page.extract_tables()
             for table in tables:
                 df = pd.DataFrame(table)
+                df.dropna(how="all", inplace=True)
+                df.columns = df.iloc[0]
+                df = df[1:]
+                df.reset_index()
+                # Capture PDF Name and Page Number for reference
                 if not df.empty:
-                    # Drop completely emptry rows
-                    df.dropna(how="all", inplace=True)
-                    df.columns = df.iloc[0]
-                    df = df[1:]
-                    df = df.reset_index(drop=True)
-                    # Capture PDF Name and Page Number for reference
                     df["PDF_Name"] = pdf_file
                     df["Page_Number"] = page_num
                     all_tables.append(df)
-
     return pd.concat(all_tables, ignore_index=True)
 
 
@@ -60,6 +64,7 @@ def save(df: pd.DataFrame, output_path: str = "output.csv"):
 
     TODO: Update this to save the processed dataframe in another place (database, dynamo, etc)
     """
+    print(f"Output saved to {output_path}")
     df.to_csv(output_path, index=False)
 
 
