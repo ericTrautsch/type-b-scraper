@@ -60,14 +60,17 @@ Output overview.gif
 Require echo
 
 Set Shell "bash"
-Set FontSize 32
+Set FontSize 20
 Set Width 1200
-Set Height 600
+Set Height 900
 
 Hide
 
 Type "cd .." Enter
 Type "nix-shell -p uv" Enter
+Sleep 100ms
+# Type "nix-shell -p uv" Enter
+Type "clear" Enter
 
 Show
 Type "uv run src/main.py" Sleep 800ms  Enter
