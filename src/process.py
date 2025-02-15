@@ -18,12 +18,17 @@ def process_pdfs(pdf_dir: str) -> pd.DataFrame:
             pdf_path = os.path.join(pdf_dir, pdf_file)
             try:
                 all_tables.append(extract_table_from_pdf(pdf_path, pdf_file))
-                print(f"Processed: {pdf_path}")
+                print(f"Extracted tables from: {pdf_path}\t\t\t\t", end="\r")
             except:
-                print(f"Failed to extract {pdf_path}")
+                print(f"Failed to extract {pdf_path}\t\t\t\t", end="\r")
                 failed_tables.append(pdf_path)
     # Concatenate all tables and serve as csv
-    print(f"Failed to extract {len(failed_tables)} files. {failed_tables}")
+    if len(failed_tables) > 0:
+        print(f"Failed to extract {len(failed_tables)} files. {failed_tables}")
+    else:
+        print(
+            f"Successfully extracted all {len(all_tables)} files.                                                   "
+        )
     final_df = pd.concat(all_tables, ignore_index=True)
     return final_df
 

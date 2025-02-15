@@ -31,12 +31,13 @@ def download_file(link: str, save_dir: str = "./data/") -> bool:
     """
     Downloads file using chunked strategy
     """
+    os.makedirs(save_dir, exist_ok=True)
     # TODO: Determine headers (if needed)
     headers = {}
     response = requests.get(link, headers)
     # TODO: Should consider error handling beyond PoC
     if response.status_code == 200:
-        print(save_dir + link.split("/")[-1])
+        print(f"Downloading {save_dir + link.split("/")[-1]}", end="\r")
         # TODO: Could consider a chunked download strategy in the future
         with open((save_dir + link.split("/")[-1]), "wb") as file:
             file.write(response.content)
@@ -50,11 +51,13 @@ def scrape_data():
     Wrapper to handle data scraping as a whole (data scraping entrypoint)
     """
     scrape_url = "https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html"
-    links = extract_links(scrape_url)
+    links = extract_links(scrape_url)[69:]
     if all([download_file(link) for link in links]):
-        print("Successfully downloaded all files!")
+        print(f"Successfully downloaded {len(links)} files!           ")
     else:
-        print("Failed to download all files successfully :(")
+        print(
+            f"Failed to download all files successfully :(. {len(links)} were successful."
+        )
 
 
 if __name__ == "__main__":
