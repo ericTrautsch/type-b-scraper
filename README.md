@@ -12,38 +12,35 @@ For the initial proof of concept, this scraper is built to run locally and produ
 
 ## Getting Started
 
-### Running the Scraper
-
-1. Clone this repository and change to repository directory.
+Clone this repository and change to repository directory.
 
 ```bash
 git clone https://github.com/ericTrautsch/type-b-scraper.git
 cd type-b-scraper
 ```
 
-#### Run via [`python`](https://www.python.org) (requires `python`)
+#### Run the code
 
-**With [`uv`](https://docs.astral.sh/uv/) installed**
+- With [`uv`](https://docs.astral.sh/uv/)
 ```bash
 uv run src/main.py
 ```
 
-**Base Python** (virtual environment advised)
+- With [Python](https://python.org) (virtual environment advised)
 ```bash
 pip install -r requirements.txt
 python src/main.py
+```
 
-#### Run via [`Docker`](https://www.docker.com) (requires `docker`)
-
-**Linux (Bash)** 
+- With [`Docker`](https://www.docker.com)
 ```bash
 docker build . -t part-b-scraper
 docker run -it --volume .:/output part-b-scraper
 ```
 
-### Viewing the output
+### View the output
 
-The output file will exist in `output.csv` in the repository directory.
+The output file will be created in `output.csv` in the repository directory by default.
 
 ## Details
 
@@ -68,10 +65,10 @@ This Proof of Concept is limited. If proven useful, here are some actions that c
 - Building deployment pipeline and infrastructure
 - Modifying entrypoint to be a lambda function or similar
 - Building more expansive tests
-  - Ensure that when documents churn on the website, it is known if this service is correctly functioning or not
-- Defining triggers; ensure the resulting pipeline is triggered
-- Log the updated fee schedules to a database/etc (see [`save`](./src/process.py)) 
-- Retain historical records of changes to fee schedules (See first paragraph of [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html))
-- ... more
+  - Ensure that issues reading documents are logged and registered
+- Defining triggers (cron, etc) for the deployed service
+- Log the updated/current fee schedules to a database/etc (see [`save`](./src/process.py)) 
+- Retain historical records of changes to fee schedules (See first paragraph of [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html)) if records are desired or useful
+- ... and more depending on usefulness
 
 
