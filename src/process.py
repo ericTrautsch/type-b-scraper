@@ -87,12 +87,12 @@ def save(df: pd.DataFrame, output_path: str = "output.csv"):
     df.to_csv(output_path, index=False)
 
 
-def process(pdf_folder: str = "./data/"):
+def process(pdf_folder: str = "./data/", output_path: str = "output.csv"):
     """
     Processes a folder of pdfs into a single dataframe and saves output
     """
     df = process_pdfs(pdf_folder)
-    save(df)
+    save(df, output_path)
 
 
 if __name__ == "__main__":

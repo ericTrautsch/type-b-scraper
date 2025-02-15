@@ -1,9 +1,10 @@
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
 
-WORKDIR proj
+WORKDIR /proj
 
 COPY . .
 
 RUN uv sync --frozen --no-dev
+RUN mkdir /output
 
-CMD "uv run src/main.py"
+ENTRYPOINT ["uv", "run", "src/main.py", "/output/output.csv"]

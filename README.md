@@ -45,10 +45,10 @@ python src/main.py
 
 #### Run via [`Docker`](https://www.docker.com) (requires `docker`)
 
-**Linux** (Works on windows, but output may not produce outside of container)
+**Linux (Bash)** 
 ```bash
 docker build . -t part-b-scraper
-docker run --volume output:. part-b-scraper
+docker run -it --volume .:/output part-b-scraper
 ```
 
 ### Viewing the output
