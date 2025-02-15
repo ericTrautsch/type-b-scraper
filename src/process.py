@@ -30,7 +30,7 @@ def process_pdfs(pdf_dir: str) -> pd.DataFrame:
             f"Successfully extracted all {len(all_tables)} files.                                                   "
         )
     final_df = pd.concat(all_tables, ignore_index=True)
-    return final_df
+    return final_df.sort_values(by=["CPT/HCPC Code"])
 
 
 def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
