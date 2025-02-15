@@ -59,11 +59,11 @@ The output file will exist in `output.csv` in the repository directory.
 
 ### Data Scraping
 
-Part B Fee Schedules are scraped and downloaded in [`src/scrape_data.py`](./src/scrape_data.py). Files are downloaded to a top-level `data/` directory to store these files.
+Part B Fee Schedules are scraped and downloaded in [`src/scrape_data.py`](./src/scrape_data.py). Files are downloaded to a top-level `data/` directory to store these files. As of 2/14/2025, 79 unique files are downloaded.
 
 ### Data Extraction
 
-`.pdf` files in the top level `data/` directory are processed, extracting and concatenating tables from the pdf files. The tables are collected and saved to `output.csv`. Implemented in [`src/process.py`](./src/process.py)
+`.pdf` files in the top level `data/` directory are processed, extracting and concatenating tables from the pdf files. The tables are collected and saved to `output.csv`. Implemented in [`src/process.py`](./src/process.py). Any files that are failed to extract will be noted, and the result set of succeeding files will still be created.
 
 ### Entrypoint
 
@@ -82,5 +82,6 @@ This Proof of Concept is limited. If proven useful, here are some actions that c
 - Defining triggers; ensure the resulting pipeline is triggered
 - Log the updated fee schedules to a database/etc (see [`save`](./src/process.py)) 
 - Retain historical records of changes to fee schedules (See first paragraph of [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html))
+- ... more
 
 

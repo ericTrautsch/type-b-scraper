@@ -9,3 +9,6 @@ def test_extract_links_length():
     """
     scrape_url = "https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html"
     assert len(scrape_data.extract_links(scrape_url)) == 79
+
+
+# TODO: Add more tests
