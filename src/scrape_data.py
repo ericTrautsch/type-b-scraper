@@ -51,7 +51,7 @@ def scrape_data():
     Wrapper to handle data scraping as a whole (data scraping entrypoint)
     """
     scrape_url = "https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html"
-    links = extract_links(scrape_url)[69:]
+    links = extract_links(scrape_url)
     if all([download_file(link) for link in links]):
         print(f"Successfully downloaded {len(links)} files!           ")
     else:

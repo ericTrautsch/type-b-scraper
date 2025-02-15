@@ -43,17 +43,31 @@ def extract_table_from_pdf(pdf_path: str, pdf_file: str) -> pd.DataFrame:
     @param pdf_file: File name of the pdf, to trace back to
     """
     all_tables = []
+    # Capture header column for pages without it.
     with pdfplumber.open(pdf_path) as pdf:
+        # Capture unique header value for the pdf
+        header_column = None
         for page_num, page in enumerate(pdf.pages, start=1):
             tables = page.extract_tables()
             for table in tables:
                 df = pd.DataFrame(table)
-                df.dropna(how="all", inplace=True)
-                df.columns = df.iloc[0]
-                df = df[1:]
-                df.reset_index()
-                # Capture PDF Name and Page Number for reference
                 if not df.empty:
+                    df.dropna(how="all", inplace=True)
+                    # Handle edge cases of None for the first row
+                    while df.iloc[0][0] is None:
+                        df = df[1:]
+                    # If the header exists on that page, remove it (set as Dataframe.columns).
+                    if df.iloc[0][0].replace("\n", " ") == "CPT/HCPC Code":
+                        df.columns = [
+                            header.replace("\n", " ") for header in df.iloc[0]
+                        ]
+                        if header_column is None:
+                            header_column = df.columns
+                        df = df[1:]
+                        df.reset_index()
+                    else:
+                        df.columns = header_column
+                    # Capture PDF Name and Page Number for reference
                     df["PDF_Name"] = pdf_file
                     df["Page_Number"] = page_num
                     all_tables.append(df)
