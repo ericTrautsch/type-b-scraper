@@ -60,20 +60,20 @@ Output overview.gif
 Require echo
 
 Set Shell "bash"
-Set FontSize 20
-Set Width 1200
-Set Height 900
+Set FontSize 24
+Set Width 800
+Set Height 1200
 
 Hide
 
 Type "cd .." Enter
 Type "export PS1=eric:~/repos/part-b-scraper/" Enter
 Type "nix-shell -p uv" Enter
-Sleep 100ms
+Sleep 500ms
 # Type "nix-shell -p uv" Enter
 Type "clear" Enter
-
 Show
+
 Type "uv run src/main.py" Sleep 800ms  Enter
 
 Sleep 60s
