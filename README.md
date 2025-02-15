@@ -14,28 +14,27 @@ For the initial proof of concept, this scraper is built to run locally and produ
 
 ### Running the Scraper
 
-1. Clone this repository and change to repository directory.
+Clone this repository and change to repository directory.
 
 ```bash
 git clone https://github.com/ericTrautsch/type-b-scraper.git
 cd type-b-scraper
 ```
 
-#### Run via [`python`](https://www.python.org) (requires `python`)
+#### Run the code
 
-**With [`uv`](https://docs.astral.sh/uv/) installed**
+- With [`uv`](https://docs.astral.sh/uv/)
 ```bash
 uv run src/main.py
 ```
 
-**Base Python** (virtual environment advised)
+- With [Python](https://python.org) (virtual environment advised)
 ```bash
 pip install -r requirements.txt
 python src/main.py
+```
 
-#### Run via [`Docker`](https://www.docker.com) (requires `docker`)
-
-**Linux (Bash)** 
+- With [`Docker`](https://www.docker.com)
 ```bash
 docker build . -t part-b-scraper
 docker run -it --volume .:/output part-b-scraper
@@ -43,7 +42,7 @@ docker run -it --volume .:/output part-b-scraper
 
 ### Viewing the output
 
-The output file will exist in `output.csv` in the repository directory.
+The output file will be created in `output.csv` in the repository directory by default.
 
 ## Details
 
