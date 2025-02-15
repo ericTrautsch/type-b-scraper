@@ -14,10 +14,11 @@ For the initial proof of concept, this scraper is built to run locally and produ
 
 ### Running the Scraper
 
-1. Clone this repository!
+1. Clone this repository and change to repository directory.
 
 ```bash
 git clone https://github.com/ericTrautsch/type-b-scraper.git
+cd type-b-scraper
 ```
 
 #### Run via [`python`](https://www.python.org) (requires `python`)
@@ -27,21 +28,10 @@ git clone https://github.com/ericTrautsch/type-b-scraper.git
 uv run src/main.py
 ```
 
-**Windows (Git Bash)**
+**Base Python** (virtual environment advised)
 ```bash
-python -m venv .venv
-. .venv/Scripts/activate
 pip install -r requirements.txt
 python src/main.py
-```
-
-**Linux (Bash)**
-```bash
-python -m venv .venv
-. .venv/bin/activate
-pip install -r requirements.txt
-python src/main.py
-```
 
 #### Run via [`Docker`](https://www.docker.com) (requires `docker`)
 
