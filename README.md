@@ -65,10 +65,10 @@ This Proof of Concept is limited. If proven useful, here are some actions that c
 - Building deployment pipeline and infrastructure
 - Modifying entrypoint to be a lambda function or similar
 - Building more expansive tests
-  - Ensure that when documents churn on the website, it is known if this service is correctly functioning or not
-- Defining triggers; ensure the resulting pipeline is triggered
-- Log the updated fee schedules to a database/etc (see [`save`](./src/process.py)) 
-- Retain historical records of changes to fee schedules (See first paragraph of [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html))
+  - Ensure that issues reading documents are logged and registered
+- Defining triggers (cron, etc) for the deployed service
+- Log the updated/current fee schedules to a database/etc (see [`save`](./src/process.py)) 
+- Retain historical records of changes to fee schedules (See first paragraph of [Part B Schedules](https://pa.gov/agencies/dli/programs-services/workers-compensation/wc-health-care-services-review/wc-fee-schedule/part-b-fee-schedules.html)) if records are desired or useful
 - ... more
 
 
