@@ -12,8 +12,6 @@ For the initial proof of concept, this scraper is built to run locally and produ
 
 ## Getting Started
 
-### Running the Scraper
-
 Clone this repository and change to repository directory.
 
 ```bash
@@ -40,7 +38,7 @@ docker build . -t part-b-scraper
 docker run -it --volume .:/output part-b-scraper
 ```
 
-### Viewing the output
+### View the output
 
 The output file will be created in `output.csv` in the repository directory by default.
 
