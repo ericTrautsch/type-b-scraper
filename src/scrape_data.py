@@ -37,7 +37,7 @@ def download_file(link: str, save_dir: str = "./data/") -> bool:
     response = requests.get(link, headers)
     # TODO: Should consider error handling beyond PoC
     if response.status_code == 200:
-        print(f"Downloading {save_dir + link.split("/")[-1]}", end="\r")
+        print(f"Downloading {save_dir + link.split('/')[-1]}", end="\r")
         # TODO: Could consider a chunked download strategy in the future
         with open((save_dir + link.split("/")[-1]), "wb") as file:
             file.write(response.content)
