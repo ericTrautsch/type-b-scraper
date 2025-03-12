@@ -5,11 +5,11 @@ default:
 build: fmt lint test
 
 fmt: 
-    ruff format
+    uv run ruff format
 
 # Lint, not break on errors
 lint: 
-    -ruff check
+    -uv run ruff check
 
 test:
     uv run pytest
